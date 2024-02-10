@@ -1,45 +1,16 @@
 // authSlice.jsx
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-    // firstName: null,
-    // firstLast: null,
-    // dateOfBirth: null,
-    // street: null,
-    // city: null,
-    // livingState: null,
-    // zipCode: null,
-    // departement: null,
-    //je ne pense pas stocké les infos dans mon store donc inutile
-};
-
-const createEmploye = createSlice({
-  name: 'create',
-  initialState,
+const employeeSlice = createSlice({
+  name: 'employees',
+  initialState:{list:[]},
   reducers: {
-    createEmploye: (state, action) => {
-        // const { 
-        //     firstName, 
-        //     lastName, 
-        //     dateOfBirth, 
-        //     dateOfHiring, 
-        //     street, 
-        //     city, 
-        //     livingState, 
-        //     zipCode, 
-        //     departement 
-        // } 
-        // = action.payload;
-        
+    addEmployee: (state, action) => {
+      state.list.push(action.payload)
     },
-
-    logout: (state) => {
-      state.isAuthenticated = false;
-      state.token = null;
-    },
-
   },
 });
 
-export const { loginSuccess, logout } = createEmploye.actions;
-export default createEmploye.reducer;
+export const { addEmployee } = employeeSlice.actions;
+export const selectEmployees = (state) => state.employees.list
+export default employeeSlice.reducer;

@@ -1,3 +1,5 @@
+// input number component
+
 const InputNumber = ({ label, value, onChange }) => { 
     return(
       <div>

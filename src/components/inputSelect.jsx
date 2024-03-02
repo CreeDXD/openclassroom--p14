@@ -1,3 +1,5 @@
+// input select component
+
 import React from 'react';
 
 const InputSelect = ({ label, value, onChange, options, valueKey, labelKey }) => {

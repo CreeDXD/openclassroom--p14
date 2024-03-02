@@ -1,3 +1,5 @@
+//the form of the page form 
+
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -7,10 +9,11 @@ import DatePicker from '../components/datePicker'
 import InputText from '../components/inputText'
 import InputSelect from './inputSelect';
 import InputNumber from './inputNumber'
-import Modal from './modal'
+import Modal from '@creedxd/modalcomponent/dist/modal/index.js';
 
 export default function MainHomePage (){
-    const [openModal, setOpenModal] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
     const [newEmployee, setNewEmployee] = useState({
         firstName: '',
         lastName: '',
@@ -25,8 +28,19 @@ export default function MainHomePage (){
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const saveEmployee = () =>{
-        dispatch(addEmployee(newEmployee));
+    const formatDates = (inputDate) =>{
+        let parts = inputDate.split('-');
+        return `${parts[2]}/${parts[1]}/${parts[0]}`;
+    }
+
+    const saveEmployee = () =>{     
+                
+            let employeeformated  = newEmployee
+            employeeformated.dateOfBirth  = formatDates(newEmployee.dateOfBirth)
+            employeeformated.dateToStart = formatDates(newEmployee.dateToStart)
+
+        dispatch(addEmployee(employeeformated));
+
         // Reset form data after saving
         setNewEmployee({
             firstName: '',
@@ -39,7 +53,7 @@ export default function MainHomePage (){
             zipcode: '',
             department: '',
         });
-        setOpenModal(true)
+        setIsModalOpen(true)
 
     }
     
@@ -48,23 +62,15 @@ export default function MainHomePage (){
         navigate('/employelist')
     }
 
-    // const handleChange = (e) => {
-    //     const { id, value } = e.target;
-    //     setNewEmployee((prevData) => ({
-    //         ...prevData,
-    //         [id]: value,
-    //     }));
-    // };
-    const handleChange = (fieldName) => (e) => {
-        setNewEmployee({ ...newEmployee, [fieldName]: e.target.value });
+    const handleChange = (fieldName) => (e) => {  
+        setNewEmployee({ ...newEmployee, [fieldName]: e.target.value});
     };
 
-    // const handleDateChange = (id, date) => {
-    //     setFormData((prevData) => ({
-    //         ...prevData,
-    //         [id]: date.toISOString().split('T')[0],
-    //     }));
-    // };
+    const hanldeCloseModal =(e) =>{
+        e.preventDefault()
+        setIsModalOpen(false)
+    }
+
     return(
         <>
             <div className="title">
@@ -134,18 +140,11 @@ export default function MainHomePage (){
                         onChange={handleChange('department')}
                         options={departments}
                     />
-                   
                     </form>       
                     <button onClick={saveEmployee}>Save</button>
                     
             </div>  
-            {
-                openModal
-                ?
-                <Modal modalText={"Employee Created!"}/>
-                :
-                ''
-            }          
+            <Modal isModalOpen={isModalOpen} hanldeCloseModal={hanldeCloseModal} modalText={"Employee Created!"}/>    
         </>
     )
 }

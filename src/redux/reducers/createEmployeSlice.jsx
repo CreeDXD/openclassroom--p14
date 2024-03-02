@@ -1,4 +1,5 @@
 // authSlice.jsx
+// addEmployee action to add employee from the form
 import { createSlice } from '@reduxjs/toolkit';
 
 const employeeSlice = createSlice({

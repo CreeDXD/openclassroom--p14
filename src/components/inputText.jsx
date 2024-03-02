@@ -1,3 +1,5 @@
+// input text component
+
 const InputText = ({ label, value, onChange }) => { 
   return(
     <div>

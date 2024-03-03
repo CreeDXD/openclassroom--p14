@@ -36,8 +36,12 @@ export default function MainHomePage (){
     const saveEmployee = () =>{     
                 
             let employeeformated  = newEmployee
-            employeeformated.dateOfBirth  = formatDates(newEmployee.dateOfBirth)
-            employeeformated.dateToStart = formatDates(newEmployee.dateToStart)
+            employeeformated.dateOfBirth 
+                ? employeeformated.dateOfBirth = formatDates(newEmployee.dateOfBirth)
+                : employeeformated.dateOfBirth  =  newEmployee.dateOfBirth
+            employeeformated.dateOfBirth 
+                ? employeeformated.dateToStart = formatDates(newEmployee.dateToStart)
+                : employeeformated.dateToStart  =  newEmployee.dateToStart
 
         dispatch(addEmployee(employeeformated));
 
@@ -141,7 +145,7 @@ export default function MainHomePage (){
                         options={departments}
                     />
                     </form>       
-                    <button onClick={saveEmployee}>Save</button>
+                    <button className="save_button" onClick={saveEmployee}>Save</button>
                     
             </div>  
             <Modal isModalOpen={isModalOpen} hanldeCloseModal={hanldeCloseModal} modalText={"Employee Created!"}/>    

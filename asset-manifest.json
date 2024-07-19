@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/testlighthouse/build/static/css/main.dca3a72c.css",
+    "main.js": "/testlighthouse/build/static/js/main.f42baee7.js",
+    "index.html": "/testlighthouse/build/index.html",
+    "main.dca3a72c.css.map": "/testlighthouse/build/static/css/main.dca3a72c.css.map",
+    "main.f42baee7.js.map": "/testlighthouse/build/static/js/main.f42baee7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dca3a72c.css",
+    "static/js/main.f42baee7.js"
+  ]
+}
